@@ -13,7 +13,8 @@ body {
   flex-wrap: wrap;
   border: solid;
 }
-.box > * {
+.box .pole {
   width: 20px;
   height: 20px;
+  background: white;
 }
