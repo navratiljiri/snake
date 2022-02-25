@@ -2,72 +2,38 @@ let vertical = 0;
 let horizontal = 0;
 let HerniPole = [];
 let end = false;
-var cas;
+var cas, jidlo;
 let snake = ["0"];
 window = onload = () => {
 
-  function buz(smer) {
-   switch (smer) {
-     case "nahoru":
-       vertical--;
-       break;
-   
-     case "dolu":
-       vertical++
-       break;
-
-       case "doprava":
-       horizontal++
-       break;
-
-       case "doleva":
-       horizontal--
-        break;
-   }
-   try {
-    document.getElementById(HerniPole[vertical][horizontal].id).style.background = "black";
-    snake.push(HerniPole[vertical][horizontal].id);
-
-    document.getElementById(snake.shift().style.background = "black");
-  
-   } 
-  catch (error) {
-     clearInterval(cas);
-     end = true;
-   }
-    
-  }
-
   vytvorHerniPole();
   dvojrozmernePole();
-
+  jidlo = setInterval(spawn, 1000);
 
   window.addEventListener("keydown", function (event) {
-  let smer = "";
-  if(!end) {
-  switch (event.key) {
-    case "ArrowUp": {
-      smer = "nahoru";
-      break;
+    let smer = "";
+    if (!end) {
+      switch (event.key) {
+        case "ArrowUp": {
+          smer = "nahoru";
+          break;
+        }
+        case "ArrowDown": {
+          smer = "dolu";
+          break;
+        }
+        case "ArrowRight": {
+          smer = "doprava";
+          break;
+        }
+        case "ArrowLeft": {
+          smer = "doleva"
+          break;
+        }
+      }
+      clearInterval(cas);
+      cas = setInterval(buz, 200, smer);
     }
-    case "ArrowDown": {
-      smer = "dolu";
-      break;
-    }       
-    case "ArrowRight": {
-      smer = "doprava";
-      break;
-    }
-    case "ArrowLeft": {
-      smer = "doleva" 
-      break;
-    }
-  }
-    clearInterval(cas);
-     cas = setInterval(buz,200,smer);
-}
-    
-    
 
   })
 }
@@ -96,4 +62,53 @@ vytvorHerniPole = () => {
     div.id = index
     box.appendChild(div);
   }
+}
+
+function buz(smer) {
+  switch (smer) {
+    case "nahoru":
+      vertical--;
+      break;
+
+    case "dolu":
+      vertical++
+      break;
+
+    case "doprava":
+      horizontal++
+      break;
+
+    case "doleva":
+      horizontal--
+      break;
+  }
+try{
+  let pole = document.getElementById(HerniPole[vertical][horizontal].id);
+  if (pole.style.background === "green") {
+      snake.push(HerniPole[vertical][horizontal].id)
+      pole.style.background = "black";
+  }
+  else if(pole.style.background === "black") {
+    gameOver();
+  }
+  else {
+    pole.style.background = "black";
+    snake.push(HerniPole[vertical][horizontal].id);
+    let last = snake.shift();
+    document.getElementById(last).style.background = "white";
+  }
+}
+catch (error) {
+   gameOver();
+ } 
+}
+
+function spawn() {
+let food = document.getElementById(HerniPole[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)].id).style.background = "green";
+}
+function gameOver() {
+  clearInterval(cas);
+  clearInterval(jidlo);
+  end = true;
+  window.alert("konec!")
 }
