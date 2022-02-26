@@ -1,17 +1,17 @@
 let vertical = 0;
 let horizontal = 0;
 let HerniPole = [];
+let casovac = 0;
 let end = false;
+let spawnFood = false;
+let smer = "";
 var cas, jidlo;
 let snake = ["0"];
 window = onload = () => {
 
   vytvorHerniPole();
   dvojrozmernePole();
-  jidlo = setInterval(spawn, 1000);
-
   window.addEventListener("keydown", function (event) {
-    let smer = "";
     if (!end) {
       switch (event.key) {
         case "ArrowUp": {
@@ -61,10 +61,12 @@ vytvorHerniPole = () => {
     div.className = "pole";
     div.id = index
     box.appendChild(div);
+
   }
 }
 
 function buz(smer) {
+  casovac++;
   switch (smer) {
     case "nahoru":
       vertical--;
@@ -82,6 +84,11 @@ function buz(smer) {
       horizontal--
       break;
   }
+  if(casovac === 5) {
+    casovac = 0;
+    spawn();
+  }
+
 try{
   let pole = document.getElementById(HerniPole[vertical][horizontal].id);
   if (pole.style.background === "green") {
@@ -104,7 +111,12 @@ catch (error) {
 }
 
 function spawn() {
-let food = document.getElementById(HerniPole[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)].id).style.background = "green";
+  let RandomPole = document.getElementById(HerniPole[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)].id)
+  while(RandomPole.style.background === "black") {
+    RandomPole = document.getElementById(HerniPole[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)].id)
+  }
+RandomPole.style.background = "green";
+  
 }
 function gameOver() {
   clearInterval(cas);
