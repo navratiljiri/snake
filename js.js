@@ -6,13 +6,15 @@ let HerniPole = [];
 let end = false;
 let smer = "";
 let cas, jidlo;
-let snake = ["0"];
+let vstup, snake;
+
+generuj();
+
 window = onload = () => {
 
 document.querySelector("input").addEventListener("click", function() {
   restart()
 })
-
 
   vytvorHerniPole();
   dvojrozmernePole();
@@ -48,7 +50,6 @@ document.querySelector("input").addEventListener("click", function() {
     else {
       restart()
     }
-
   })
 }
 
@@ -61,12 +62,15 @@ dvojrozmernePole = () => {
     }
   }
 
-  for (let index = 0; index <= 19; index++) {
-    for (let index2 = 0; index2 <= 19; index2++) {
-      HerniPole[index][index2] = pole[indexx];
+  for (let vertikala = 0; vertikala <= 19; vertikala++) {
+    for (let horizontala = 0; horizontala <= 19; horizontala++) {
+      HerniPole[vertikala][horizontala] = pole[indexx];
+      if(pole[indexx].style.background == "black") {
+          vertical = vertikala
+          horizontal = horizontala
+      }
       indexx++;
     }
-
   }
 }
 vytvorHerniPole = () => {
@@ -76,7 +80,8 @@ vytvorHerniPole = () => {
     div.className = "pole"
     div.id = index
     div.style.background = "white"
-    if (0 == index) {
+
+    if (snake[0] == index) {
       div.style.background = "black"
     }
     box.appendChild(div);
@@ -103,13 +108,14 @@ function buz(smer) {
       horizontal--
       break;
   }
-  if(casovac === 8) {
+  if(casovac === 10) {
     casovac = 0;
     spawn();
   }
 
 try {
   let pole = document.getElementById(HerniPole[vertical][horizontal].id)
+
   if (pole.style.background === "green") {
       snake.push(HerniPole[vertical][horizontal].id)
       pole.style.background = "black";
@@ -137,8 +143,8 @@ function spawn() {
     RandomPole = document.getElementById(HerniPole[Math.floor(Math.random() * 20)][Math.floor(Math.random() * 20)].id)
   }
 RandomPole.style.background = "green";
-  
 }
+
 gameOver = () => {
   clearInterval(cas);
   clearInterval(jidlo);
@@ -150,13 +156,16 @@ restart = () => {
   clearInterval(cas);
   end = false
   skore = 0
-  vertical = 0
-  horizontal = 0
-  snake = ["0"]
+  document.querySelector("p").innerHTML = "Skore: " + skore
+  generuj()
   for (let index = 0; index < 400; index++) {
     document.getElementById(index).style.background = "white"
-    if(0 === index) {
+    if(snake[0] == index) {
       document.getElementById(index).style.background = "black"
     }
   }
+}
+
+function generuj()  {
+  snake = [Math.floor(Math.random() * 400)];
 }
