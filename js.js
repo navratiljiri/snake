@@ -1,18 +1,23 @@
 let vertical = 0;
 let horizontal = 0;
 let casovac = 0;
-let skore = 1;
+let skore = 0;
 let HerniPole = [];
 let end = false;
-let spawnFood = false;
 let smer = "";
 let cas, jidlo;
 let snake = ["0"];
 window = onload = () => {
 
+document.querySelector("input").addEventListener("click", function() {
+  restart()
+})
+
+
   vytvorHerniPole();
   dvojrozmernePole();
-  window.addEventListener("keydown", function (event) {
+  window.addEventListener("keyup", function (event) {
+    let JinaKlavesa = false;
     if (!end) {
       switch (event.key) {
         case "ArrowUp": {
@@ -29,11 +34,19 @@ window = onload = () => {
         }
         case "ArrowLeft": {
           smer = "doleva"
-          break;
+          break;                     
         }
+        default :
+        JinaKlavesa = true;
+          break;
       }
-      clearInterval(cas);
-      cas = setInterval(buz, 200, smer);
+      if(!JinaKlavesa) {
+        clearInterval(cas);
+        cas = setInterval(buz, 100, smer);
+      }
+    }
+    else {
+      restart()
     }
 
   })
@@ -59,9 +72,13 @@ dvojrozmernePole = () => {
 vytvorHerniPole = () => {
   let box = document.querySelector(".box")
   for (let index = 0; index < 400; index++) {
-    let div = document.createElement("div");
-    div.className = "pole";
+    let div = document.createElement("div")
+    div.className = "pole"
     div.id = index
+    div.style.background = "white"
+    if (0 == index) {
+      div.style.background = "black"
+    }
     box.appendChild(div);
 
   }
@@ -86,17 +103,18 @@ function buz(smer) {
       horizontal--
       break;
   }
-  if(casovac === 5) {
+  if(casovac === 8) {
     casovac = 0;
     spawn();
   }
 
-try{
+try {
   let pole = document.getElementById(HerniPole[vertical][horizontal].id)
   if (pole.style.background === "green") {
       snake.push(HerniPole[vertical][horizontal].id)
       pole.style.background = "black";
-      document.querySelector("p").innerHTML = "skore: " + skore++
+      skore++
+      document.querySelector("p").innerHTML = "Skore: " + skore
   }
   else if(pole.style.background === "black") {
     gameOver();
@@ -108,9 +126,9 @@ try{
     document.getElementById(last).style.background = "white"
   }
 }
-catch (error) {
-   gameOver();
- } 
+  catch {
+    gameOver();
+  }
 }
 
 function spawn() {
@@ -121,9 +139,24 @@ function spawn() {
 RandomPole.style.background = "green";
   
 }
-function gameOver() {
+gameOver = () => {
   clearInterval(cas);
   clearInterval(jidlo);
   end = true;
   window.alert("konec!")
+}
+
+restart = () => {
+  clearInterval(cas);
+  end = false
+  skore = 0
+  vertical = 0
+  horizontal = 0
+  snake = ["0"]
+  for (let index = 0; index < 400; index++) {
+    document.getElementById(index).style.background = "white"
+    if(0 === index) {
+      document.getElementById(index).style.background = "black"
+    }
+  }
 }

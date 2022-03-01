@@ -22,5 +22,6 @@ main {
   height: 20px;
   background: white;
 }
-p {
+input {
+  cursor: pointer;
 }
