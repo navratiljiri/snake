@@ -9,7 +9,7 @@ main {
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  background: #5e8fb5;
+  background: #1a5aa3;
 }
 .box {
   width: 400px;
@@ -23,11 +23,58 @@ main {
   height: 20px;
   background: white;
 }
-input {
-  border: none;
-  outline: none;
-  padding: 14px 48px;
+.btn {
+  background: rgba(161, 161, 161, 0.753);
+  height: 60px;
+  width: 140px;
   border-radius: 22px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  background: rgb(255, 123, 0);
+  width: 0px;
+  z-index: 1;
+  height: 60px;
+  transition: 0.5s all;
+  border-radius: 22px;
+}
+.btn:hover:before {
+  width: 140px;
+}
+.btn a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-decoration: none;
+  color: black;
   font-size: 24px;
+  z-index: 2;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+p {
+  font-size: 22px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.no {
+  background: #4b4b4b;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  height: 100vh;
+}
+.no p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 24px;
+  color: white;
 }

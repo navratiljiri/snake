@@ -12,7 +12,7 @@ generuj();
 
 window = onload = () => {
 
-document.querySelector("input").addEventListener("click", function() {
+document.querySelector(".btn").addEventListener("click", function() {
   restart()
 })
 
@@ -157,13 +157,26 @@ restart = () => {
   end = false
   skore = 0
   document.querySelector("p").innerHTML = "Skore: " + skore
+
   generuj()
+
   for (let index = 0; index < 400; index++) {
     document.getElementById(index).style.background = "white"
     if(snake[0] == index) {
       document.getElementById(index).style.background = "black"
     }
   }
+    let pole = document.querySelectorAll(".pole");
+    let indexx = 0;
+    for (let vertikala = 0; vertikala <= 19; vertikala++) {
+      for (let horizontala = 0; horizontala <= 19; horizontala++) {
+        if(pole[indexx].style.background == "black") {
+            vertical = vertikala
+            horizontal = horizontala
+        }
+        indexx++
+      }
+    }
 }
 
 function generuj()  {
