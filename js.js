@@ -5,37 +5,46 @@ let skore = 0;
 let HerniPole = [];
 let end = false;
 let smer = "";
+let PovoleniStisku = true;
 let cas, jidlo;
-let vstup, snake;
+let vstup;
+let snake = [];
 
 generuj();
 
 window = onload = () => {
-
 document.querySelector(".btn").addEventListener("click", function() {
   restart()
 })
-
   vytvorHerniPole();
   dvojrozmernePole();
+
   window.addEventListener("keyup", function (event) {
     let JinaKlavesa = false;
     if (!end) {
       switch (event.key) {
         case "ArrowUp": {
-          smer = "nahoru";
+          if (HerniPole[vertical - 1][horizontal].id !== snake[skore - 1]) {
+            smer = "nahoru";
+          }
           break;
         }
         case "ArrowDown": {
-          smer = "dolu";
+          if (HerniPole[vertical + 1][horizontal].id !== snake[skore - 1]) {
+            smer = "dolu";
+          }
           break;
         }
         case "ArrowRight": {
-          smer = "doprava";
+          if (HerniPole[vertical][horizontal + 1].id !== snake[skore - 1]){
+            smer = "doprava";
+          }
           break;
         }
         case "ArrowLeft": {
-          smer = "doleva"
+          if (HerniPole[vertical][horizontal - 1].id !== snake[skore - 1]) {
+            smer = "doleva"
+          }
           break;                     
         }
         default :
@@ -45,13 +54,14 @@ document.querySelector(".btn").addEventListener("click", function() {
       if(!JinaKlavesa) {
         clearInterval(cas);
         cas = setInterval(buz, 100, smer);
-      }
-    }
+      }  
+    }         
     else {
       restart()
     }
   })
 }
+  
 
 dvojrozmernePole = () => {
   let pole = document.querySelectorAll(".pole");
@@ -85,10 +95,8 @@ vytvorHerniPole = () => {
       div.style.background = "black"
     }
     box.appendChild(div);
-
   }
 }
-
 function buz(smer) {
   casovac++;
   switch (smer) {
