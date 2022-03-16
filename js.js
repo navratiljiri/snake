@@ -7,7 +7,6 @@ let end = false;
 let smer = "";
 let PovoleniStisku = true;
 let cas, jidlo;
-let vstup;
 let snake = [];
 
 generuj();
@@ -18,6 +17,7 @@ document.querySelector(".btn").addEventListener("click", function() {
 })
   vytvorHerniPole();
   dvojrozmernePole();
+
 
   window.addEventListener("keyup", function (event) {
     let JinaKlavesa = false;
@@ -61,7 +61,6 @@ document.querySelector(".btn").addEventListener("click", function() {
     }
   })
 }
-  
 
 dvojrozmernePole = () => {
   let pole = document.querySelectorAll(".pole");
@@ -120,7 +119,6 @@ function buz(smer) {
     casovac = 0;
     spawn();
   }
-
 try {
   let pole = document.getElementById(HerniPole[vertical][horizontal].id)
 
@@ -140,6 +138,7 @@ try {
     document.getElementById(last).style.background = "white"
   }
 }
+
   catch {
     gameOver();
   }
