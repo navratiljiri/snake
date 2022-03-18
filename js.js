@@ -12,9 +12,9 @@ let snake = [];
 generuj();
 
 window = onload = () => {
-document.querySelector(".btn").addEventListener("click", function() {
-  restart()
-})
+  document.querySelector(".btn").addEventListener("click", function () {
+    restart()
+  })
   vytvorHerniPole();
   dvojrozmernePole();
 
@@ -36,7 +36,7 @@ document.querySelector(".btn").addEventListener("click", function() {
           break;
         }
         case "ArrowRight": {
-          if (HerniPole[vertical][horizontal + 1].id !== snake[skore - 1]){
+          if (HerniPole[vertical][horizontal + 1].id !== snake[skore - 1]) {
             smer = "doprava";
           }
           break;
@@ -45,17 +45,17 @@ document.querySelector(".btn").addEventListener("click", function() {
           if (HerniPole[vertical][horizontal - 1].id !== snake[skore - 1]) {
             smer = "doleva"
           }
-          break;                     
+          break;
         }
-        default :
-        JinaKlavesa = true;
+        default:
+          JinaKlavesa = true;
           break;
       }
-      if(!JinaKlavesa) {
+      if (!JinaKlavesa) {
         clearInterval(cas);
         cas = setInterval(buz, 100, smer);
-      }  
-    }         
+      }
+    }
     else {
       restart()
     }
@@ -74,9 +74,9 @@ dvojrozmernePole = () => {
   for (let vertikala = 0; vertikala <= 19; vertikala++) {
     for (let horizontala = 0; horizontala <= 19; horizontala++) {
       HerniPole[vertikala][horizontala] = pole[indexx];
-      if(pole[indexx].style.background == "black") {
-          vertical = vertikala
-          horizontal = horizontala
+      if (pole[indexx].style.background == "black") {
+        vertical = vertikala
+        horizontal = horizontala
       }
       indexx++;
     }
@@ -115,29 +115,29 @@ function buz(smer) {
       horizontal--
       break;
   }
-  if(casovac === 10) {
+  if (casovac === 10) {
     casovac = 0;
     spawn();
   }
-try {
-  let pole = document.getElementById(HerniPole[vertical][horizontal].id)
+  try {
+    let pole = document.getElementById(HerniPole[vertical][horizontal].id)
 
-  if (pole.style.background === "green") {
+    if (pole.style.background === "green") {
       snake.push(HerniPole[vertical][horizontal].id)
       pole.style.background = "black";
       skore++
       document.querySelector("p").innerHTML = "Skore: " + skore
+    }
+    else if (pole.style.background === "black") {
+      gameOver();
+    }
+    else {
+      pole.style.background = "black"
+      snake.push(HerniPole[vertical][horizontal].id)
+      let last = snake.shift()
+      document.getElementById(last).style.background = "white"
+    }
   }
-  else if(pole.style.background === "black") {
-    gameOver();
-  }
-  else {
-    pole.style.background = "black"
-    snake.push(HerniPole[vertical][horizontal].id)
-    let last = snake.shift()
-    document.getElementById(last).style.background = "white"
-  }
-}
 
   catch {
     gameOver();
@@ -146,10 +146,10 @@ try {
 
 function spawn() {
   let RandomPole = document.getElementById(HerniPole[Math.floor(Math.random() * 20)][Math.floor(Math.random() * 20)].id)
-  while(RandomPole.style.background === "black") {
+  while (RandomPole.style.background === "black") {
     RandomPole = document.getElementById(HerniPole[Math.floor(Math.random() * 20)][Math.floor(Math.random() * 20)].id)
   }
-RandomPole.style.background = "green";
+  RandomPole.style.background = "green";
 }
 
 gameOver = () => {
@@ -169,23 +169,23 @@ restart = () => {
 
   for (let index = 0; index < 400; index++) {
     document.getElementById(index).style.background = "white"
-    if(snake[0] == index) {
+    if (snake[0] == index) {
       document.getElementById(index).style.background = "black"
     }
   }
-    let pole = document.querySelectorAll(".pole");
-    let indexx = 0;
-    for (let vertikala = 0; vertikala <= 19; vertikala++) {
-      for (let horizontala = 0; horizontala <= 19; horizontala++) {
-        if(pole[indexx].style.background == "black") {
-            vertical = vertikala
-            horizontal = horizontala
-        }
-        indexx++
+  let pole = document.querySelectorAll(".pole");
+  let indexx = 0;
+  for (let vertikala = 0; vertikala <= 19; vertikala++) {
+    for (let horizontala = 0; horizontala <= 19; horizontala++) {
+      if (pole[indexx].style.background == "black") {
+        vertical = vertikala
+        horizontal = horizontala
       }
+      indexx++
     }
+  }
 }
 
-function generuj()  {
+function generuj() {
   snake = [Math.floor(Math.random() * 400)];
 }

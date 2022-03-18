@@ -1,0 +1,77 @@
+.center, .box, .title, .obj {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.box {
+  width: 100%;
+  height: 100vh;
+  background: #2431eb;
+}
+
+.box form {
+  background: white;
+  border: solid 1px #464646;
+  -webkit-box-shadow: 6px 5px 0px 2px #464646;
+          box-shadow: 6px 5px 0px 2px #464646;
+  border-radius: 24px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  width: 575px;
+  height: 700px;
+}
+
+.title {
+  margin: 0;
+  background: #4083ff;
+  width: 100%;
+  height: 100px;
+  color: white;
+}
+
+.obj {
+  width: 100%;
+  height: 80%;
+  gap: 10%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+input[type="text"] {
+  padding: 16px 18px;
+  outline: none;
+  border: solid 1px #464646;
+  -webkit-box-shadow: 6px 5px 0px 2px #464646;
+          box-shadow: 6px 5px 0px 2px #464646;
+  width: 300px;
+  height: 30px;
+  font-size: 24px;
+}
+
+input[type="submit"] {
+  font-size: 24px;
+  width: 350px;
+  height: 60px;
+  cursor: pointer;
+}
+
+form a {
+  font-size: 20px;
+  color: black;
+}
+/*# sourceMappingURL=login.css.map */
