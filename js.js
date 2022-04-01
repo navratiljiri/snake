@@ -2,6 +2,7 @@ let vertical = 0;
 let horizontal = 0;
 let casovac = 0;
 let skore = 0;
+var timeout = 10000;
 let HerniPole = [];
 let end = false;
 let smer = "";
@@ -9,17 +10,29 @@ let PovoleniStisku = true;
 let cas, jidlo;
 let snake = [];
 
+
+
 generuj();
 
 window = onload = () => {
   document.querySelector(".btn").addEventListener("click", function () {
     restart()
   })
+  document.getElementById("BtnRestart").addEventListener("click",function () {
+    restart();
+    document.querySelector(".MainDisplay").style.display = "flex";
+    document.querySelector(".GameOverBox").style.display = "none";
+    document.querySelector("main").style.filter = "blur(0px)"
+  })
   vytvorHerniPole();
   dvojrozmernePole();
 
+}
 
-  window.addEventListener("keyup", function (event) {
+
+
+  window.addEventListener("keyup", function (event)  {
+
     let JinaKlavesa = false;
     if (!end) {
       switch (event.key) {
@@ -59,8 +72,11 @@ window = onload = () => {
     else {
       restart()
     }
+  
   })
-}
+
+
+
 
 dvojrozmernePole = () => {
   let pole = document.querySelectorAll(".pole");
@@ -96,7 +112,7 @@ vytvorHerniPole = () => {
     box.appendChild(div);
   }
 }
-function buz(smer) {
+ function buz(smer) {
   casovac++;
   switch (smer) {
     case "nahoru":
@@ -128,6 +144,12 @@ function buz(smer) {
       skore++
       document.querySelector("p").innerHTML = "Skore: " + skore
     }
+    else if (pole.style.background=== "yellow") {
+      snake.push(HerniPole[vertical][horizontal].id)
+      pole.style.background = "black";
+      skore += 3;
+      document.querySelector("p").innerHTML = "Skore: " + skore
+    }
     else if (pole.style.background === "black") {
       gameOver();
     }
@@ -143,26 +165,50 @@ function buz(smer) {
     gameOver();
   }
 }
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+let goldFood = 0;
 
 function spawn() {
+  goldFood++;
+  if(goldFood == 5) {
+      goldFood = 0; 
+      let RandomPole = checkSpawn();    
+      RandomPole.style.background = "Yellow";
+      setTimeout(() => {
+        RandomPole.style.background = "white";
+      },3000);
+  }
+  else {  
+    checkSpawn().style.background = "green";
+  }
+ 
+}
+
+checkSpawn = () => {
   let RandomPole = document.getElementById(HerniPole[Math.floor(Math.random() * 20)][Math.floor(Math.random() * 20)].id)
   while (RandomPole.style.background === "black") {
     RandomPole = document.getElementById(HerniPole[Math.floor(Math.random() * 20)][Math.floor(Math.random() * 20)].id)
   }
-  RandomPole.style.background = "green";
+  return RandomPole;
 }
 
 gameOver = () => {
-  clearInterval(cas);
-  clearInterval(jidlo);
+  clearInterval(cas)
+  clearInterval(jidlo)
   end = true;
-  window.alert("konec!")
+  document.querySelector(".MainDisplay").style.display = "none";
+  document.querySelector(".GameOverBox").style.display = "flex";
+  document.querySelector("main").style.filter = "blur(2px)"
+  document.getElementById("skore").innerHTML = "Tvé skore činí: " + skore;
 }
 
 restart = () => {
   clearInterval(cas);
   end = false
   skore = 0
+  goldFood = 0
   document.querySelector("p").innerHTML = "Skore: " + skore
 
   generuj()
@@ -189,3 +235,4 @@ restart = () => {
 function generuj() {
   snake = [Math.floor(Math.random() * 400)];
 }
+

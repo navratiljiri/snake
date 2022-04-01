@@ -11,6 +11,12 @@ main {
   width: 100%;
   background: #1a5aa3;
 }
+.MainDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 .box {
   width: 400px;
   height: 400px;
@@ -78,4 +84,30 @@ p {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-size: 24px;
   color: white;
+}
+.GameOverBox {
+  position: fixed;
+  background: #112A46;
+  width: 35%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display:none;
+  border-radius: 24px;
+}
+.GameOverBox p:nth-child(1) {
+  font-size: 32px;
+}
+.GameOverBox .btn 
+{
+  background: #515151;
+}
+.GameOverBox .btn a {
+  color:white;
 }
