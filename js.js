@@ -7,6 +7,7 @@ let HerniPole = [];
 let end = false;
 let smer = "";
 let PovoleniStisku = true;
+let controlVariable = 1;
 let cas, jidlo;
 let snake = [];
 
@@ -32,30 +33,30 @@ window = onload = () => {
 
 
   window.addEventListener("keyup", function (event)  {
-
+ 
     let JinaKlavesa = false;
     if (!end) {
       switch (event.key) {
         case "ArrowUp": {
-          if (HerniPole[vertical - 1][horizontal].id !== snake[skore - 1]) {
+          if (HerniPole[vertical - 1][horizontal].id !== snake[skore - controlVariable]) {
             smer = "nahoru";
           }
           break;
         }
         case "ArrowDown": {
-          if (HerniPole[vertical + 1][horizontal].id !== snake[skore - 1]) {
+          if (HerniPole[vertical + 1][horizontal].id !== snake[skore - controlVariable]) {
             smer = "dolu";
           }
           break;
         }
         case "ArrowRight": {
-          if (HerniPole[vertical][horizontal + 1].id !== snake[skore - 1]) {
+          if (HerniPole[vertical][horizontal + 1].id !== snake[skore - controlVariable]) {
             smer = "doprava";
           }
           break;
         }
         case "ArrowLeft": {
-          if (HerniPole[vertical][horizontal - 1].id !== snake[skore - 1]) {
+          if (HerniPole[vertical][horizontal - 1].id !== snake[skore - controlVariable]) {
             smer = "doleva"
           }
           break;
@@ -68,9 +69,6 @@ window = onload = () => {
         clearInterval(cas);
         cas = setInterval(buz, 100, smer);
       }
-    }
-    else {
-      restart()
     }
   
   })
@@ -136,19 +134,21 @@ vytvorHerniPole = () => {
     spawn();
   }
   try {
+    
     let pole = document.getElementById(HerniPole[vertical][horizontal].id)
 
     if (pole.style.background === "green") {
       snake.push(HerniPole[vertical][horizontal].id)
       pole.style.background = "black";
       skore++
-      document.querySelector("p").innerHTML = "Skore: " + skore
+      addingScore();
     }
-    else if (pole.style.background=== "yellow") {
+    else if (pole.style.background === "yellow") {
       snake.push(HerniPole[vertical][horizontal].id)
       pole.style.background = "black";
+      controlVariable += 2;
       skore += 3;
-      document.querySelector("p").innerHTML = "Skore: " + skore
+      addingScore();
     }
     else if (pole.style.background === "black") {
       gameOver();
@@ -160,10 +160,12 @@ vytvorHerniPole = () => {
       document.getElementById(last).style.background = "white"
     }
   }
-
   catch {
     gameOver();
   }
+}
+addingScore = () => {
+  document.querySelector("p").innerHTML = "Skore: " + skore
 }
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -175,9 +177,11 @@ function spawn() {
   if(goldFood == 5) {
       goldFood = 0; 
       let RandomPole = checkSpawn();    
-      RandomPole.style.background = "Yellow";
+      RandomPole.style.background = "yellow";
       setTimeout(() => {
-        RandomPole.style.background = "white";
+        if(RandomPole.style.background === "yellow"){
+          RandomPole.style.background = "white";
+        }       
       },3000);
   }
   else {  
@@ -207,6 +211,7 @@ gameOver = () => {
 restart = () => {
   clearInterval(cas);
   end = false
+  controlVariable = 1;
   skore = 0
   goldFood = 0
   document.querySelector("p").innerHTML = "Skore: " + skore
@@ -223,7 +228,7 @@ restart = () => {
   let indexx = 0;
   for (let vertikala = 0; vertikala <= 19; vertikala++) {
     for (let horizontala = 0; horizontala <= 19; horizontala++) {
-      if (pole[indexx].style.background == "black") {
+      if (pole[indexx].style.background === "black") {
         vertical = vertikala
         horizontal = horizontala
       }
