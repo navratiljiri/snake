@@ -210,7 +210,7 @@ gameOver = () => {
 
 restart = () => {
   clearInterval(cas);
-  end = false
+  end = false;
   controlVariable = 1;
   skore = 0
   goldFood = 0

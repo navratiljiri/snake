@@ -2,7 +2,9 @@
 <html lang="cs-cz">
   <head>
     <link rel="stylesheet" href="login.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8" />
+    <script src="login.js"></script>
     <title>Login</title>
   </head>
   <body>
@@ -12,10 +14,10 @@
         <h1>Login User</h1>  
          </div>
         <div class="obj">   
-          <input type="text" placeholder="Nickname" name="nickname" />       
-          <input type="text" placeholder="Password" name="heslo" />
-          <a href="#">I'm not registered?</a>
-        <input type="submit" name="send" />
+          <input type="text" placeholder="Nickname" name="nickname" maxlength="20" required/>       
+          <input type="text" placeholder="Password" name="heslo"  maxlength="30" required/>
+          <a href="/register/register.html">I'm not registered?</a>
+        <input type="submit" value="Login" name="send" />
       </form>
     </div>
 </div>

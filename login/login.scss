@@ -1,5 +1,7 @@
-$mainColor: #2431eb;
+$mainColor: #1329f3;
 $formColor: #4083ff;
+$button: #1cb0f6;
+$inputs: #464646;
 .center {
   display: flex;
   align-items: center;
@@ -18,14 +20,14 @@ body {
 }
 .box form {
   background: white;
-  border: solid 1px #464646;
-  box-shadow: 6px 5px 0px 2px #464646;
+  border: solid 1px $inputs;
+  box-shadow: 6px 5px 0px 2px $inputs;
   border-radius: 24px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  width: 575px;
-  height: 700px;
+  width: 500px;
+  height: 650px;
 }
 .title {
   margin: 0;
@@ -45,18 +47,25 @@ body {
 input[type="text"] {
   padding: 16px 18px;
   outline: none;
-  border: solid 1px #464646;
-  box-shadow: 6px 5px 0px 2px #464646;
+  border: solid 1px $inputs;
+  box-shadow: 6px 5px 0px 2px $inputs;
   width: 300px;
   height: 30px;
   font-size: 24px;
 }
 input[type="submit"] {
   font-size: 24px;
+  outline: none;
+  background: $button;
   width: 350px;
+  border: none;
+  border-bottom: solid 5px $inputs;
+  border-radius: 12px;
   height: 60px;
+  color: white;
   cursor: pointer;
 }
+
 form a {
   font-size: 20px;
   color: black;

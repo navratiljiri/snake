@@ -1,0 +1,78 @@
+$mainColor: #2d6ecf;
+$formColor: #ff4059;
+$button: #00fa2a;
+$inputs: #464646;
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+.box {
+  width: 100%;
+  height: 100vh;
+  @extend .center;
+  background: $mainColor;
+}
+.box form {
+  background: white;
+  border: solid 1px $inputs;
+  box-shadow: 6px 5px 0px 2px $inputs;
+  border-radius: 24px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  width: 800px;
+  height: 650px;
+}
+.inputs {
+  display: flex;
+  gap: 5%;
+}
+.title {
+  margin: 0;
+  @extend .center;
+  background: $formColor;
+  width: 100%;
+  height: 100px;
+  color: white;
+}
+.obj {
+  @extend .center;
+  width: 100%;
+  height: 80%;
+  gap: 8%;
+  flex-direction: column;
+}
+input[type="text"],
+input[type="email"] {
+  padding: 14px 18px;
+  outline: none;
+  border: solid 1px $inputs;
+  box-shadow: 6px 5px 0px 2px $inputs;
+  width: 300px;
+  height: 25px;
+  font-size: 24px;
+}
+input[type="submit"] {
+  margin-top: 30px;
+  font-size: 24px;
+  outline: none;
+  background: $button;
+  width: 350px;
+  border: none;
+  border-bottom: solid 5px $inputs;
+  border-radius: 12px;
+  height: 60px;
+  color: white;
+  cursor: pointer;
+}
+
+form a {
+  font-size: 20px;
+  color: black;
+}
