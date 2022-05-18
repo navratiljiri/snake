@@ -19,7 +19,7 @@ window = onload = () => {
   document.querySelector(".btn").addEventListener("click", function () {
     restart()
   })
-  document.getElementById("BtnRestart").addEventListener("click",function () {
+  document.getElementById("BtnRestart").addEventListener("click", function () {
     restart();
     document.querySelector(".MainDisplay").style.display = "flex";
     document.querySelector(".GameOverBox").style.display = "none";
@@ -32,46 +32,46 @@ window = onload = () => {
 
 
 
-  window.addEventListener("keyup", function (event)  {
- 
-    let JinaKlavesa = false;
-    if (!end) {
-      switch (event.key) {
-        case "ArrowUp": {
-          if (HerniPole[vertical - 1][horizontal].id !== snake[skore - controlVariable]) {
-            smer = "nahoru";
-          }
-          break;
+window.addEventListener("keyup", function (event) {
+
+  let JinaKlavesa = false;
+  if (!end) {
+    switch (event.key) {
+      case "ArrowUp": {
+        if (HerniPole[vertical - 1][horizontal].id !== snake[skore - controlVariable]) {
+          smer = "nahoru";
         }
-        case "ArrowDown": {
-          if (HerniPole[vertical + 1][horizontal].id !== snake[skore - controlVariable]) {
-            smer = "dolu";
-          }
-          break;
-        }
-        case "ArrowRight": {
-          if (HerniPole[vertical][horizontal + 1].id !== snake[skore - controlVariable]) {
-            smer = "doprava";
-          }
-          break;
-        }
-        case "ArrowLeft": {
-          if (HerniPole[vertical][horizontal - 1].id !== snake[skore - controlVariable]) {
-            smer = "doleva"
-          }
-          break;
-        }
-        default:
-          JinaKlavesa = true;
-          break;
+        break;
       }
-      if (!JinaKlavesa) {
-        clearInterval(cas);
-        cas = setInterval(buz, 100, smer);
+      case "ArrowDown": {
+        if (HerniPole[vertical + 1][horizontal].id !== snake[skore - controlVariable]) {
+          smer = "dolu";
+        }
+        break;
       }
+      case "ArrowRight": {
+        if (HerniPole[vertical][horizontal + 1].id !== snake[skore - controlVariable]) {
+          smer = "doprava";
+        }
+        break;
+      }
+      case "ArrowLeft": {
+        if (HerniPole[vertical][horizontal - 1].id !== snake[skore - controlVariable]) {
+          smer = "doleva"
+        }
+        break;
+      }
+      default:
+        JinaKlavesa = true;
+        break;
     }
-  
-  })
+    if (!JinaKlavesa) {
+      clearInterval(cas);
+      cas = setInterval(buz, 100, smer);
+    }
+  }
+
+})
 
 
 
@@ -110,7 +110,7 @@ vytvorHerniPole = () => {
     box.appendChild(div);
   }
 }
- function buz(smer) {
+function buz(smer) {
   casovac++;
   switch (smer) {
     case "nahoru":
@@ -134,7 +134,7 @@ vytvorHerniPole = () => {
     spawn();
   }
   try {
-    
+
     let pole = document.getElementById(HerniPole[vertical][horizontal].id)
 
     if (pole.style.background === "green") {
@@ -174,20 +174,20 @@ let goldFood = 0;
 
 function spawn() {
   goldFood++;
-  if(goldFood == 5) {
-      goldFood = 0; 
-      let RandomPole = checkSpawn();    
-      RandomPole.style.background = "yellow";
-      setTimeout(() => {
-        if(RandomPole.style.background === "yellow"){
-          RandomPole.style.background = "white";
-        }       
-      },3000);
+  if (goldFood == 5) {
+    goldFood = 0;
+    let RandomPole = checkSpawn();
+    RandomPole.style.background = "yellow";
+    setTimeout(() => {
+      if (RandomPole.style.background === "yellow") {
+        RandomPole.style.background = "white";
+      }
+    }, 3000);
   }
-  else {  
+  else {
     checkSpawn().style.background = "green";
   }
- 
+
 }
 
 checkSpawn = () => {
@@ -205,11 +205,11 @@ gameOver = () => {
   document.querySelector(".MainDisplay").style.display = "none";
   document.querySelector(".GameOverBox").style.display = "flex";
   document.querySelector("main").style.filter = "blur(2px)"
-  document.getElementById("skore").innerHTML = "Tvé skore činí: " + skore;
+  document.getElementById("skore").innerHTML = "Tvé skore činí: " + skore
 }
 
 restart = () => {
-  clearInterval(cas);
+  clearInterval(cas)
   end = false;
   controlVariable = 1;
   skore = 0
